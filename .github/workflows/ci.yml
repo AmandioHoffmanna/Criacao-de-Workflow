@@ -50,3 +50,6 @@ jobs:
     steps:
       - name: Simular Deploy
         run: echo "Deploy realizado com sucesso!"
+
+- name: Formatar código com Black
+  run: pip install black && black .
