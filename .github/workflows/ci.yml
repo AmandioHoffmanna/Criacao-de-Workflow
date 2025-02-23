@@ -21,7 +21,10 @@ jobs:
           python-version: '3.9'
 
       - name: Instalar dependências
-        run: pip install flake8
+        run: pip install flake8 black
+
+      - name: Formatar código com Black
+        run: black .
 
       - name: Verificar linting
         run: flake8 projeto.py teste.py
@@ -50,6 +53,3 @@ jobs:
     steps:
       - name: Simular Deploy
         run: echo "Deploy realizado com sucesso!"
-
-- name: Formatar código com Black
-  run: pip install black && black .
