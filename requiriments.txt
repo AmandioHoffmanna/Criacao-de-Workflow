@@ -1,0 +1,1 @@
+echo "flake8\npytest" > requirements.txt

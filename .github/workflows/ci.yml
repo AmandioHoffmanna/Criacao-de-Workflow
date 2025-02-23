@@ -1,0 +1,52 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependências
+        run: pip install flake8
+
+      - name: Verificar linting
+        run: flake8 projeto.py teste.py
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependências
+        run: pip install pytest
+
+      - name: Executar testes
+        run: pytest teste.py
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Simular Deploy
+        run: echo "Deploy realizado com sucesso!"
